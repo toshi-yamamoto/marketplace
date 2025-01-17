@@ -1,0 +1,88 @@
+/* コンテナ */
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* 見出し */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* プロフィール画像 */
+.profile-image {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.profile-image img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ddd;
+}
+
+.image-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.image-button:hover {
+    background-color: #e63939;
+}
+
+#profile_image {
+    display: none;
+    /* ファイル選択ボタンを非表示に */
+}
+
+/* フォームラベル */
+label {
+    font-weight: bold;
+    display: block;
+    text-align: left;
+    margin: 10px 0 5px;
+}
+
+/* 入力フィールド */
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* ボタン */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #d67c6f;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #b56554;
+}
+
+/* エラーメッセージ */
+.error {
+    color: red;
+    font-size: 14px;
+    text-align: left;
+    margin-bottom: 10px;
+}

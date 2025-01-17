@@ -1,0 +1,61 @@
+/* コンテナ */
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+/* 見出し */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+/* タブ */
+.tabs a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+
+.tabs a.active {
+    color: #d67c6f;
+    border-bottom: 2px solid #d67c6f;
+}
+
+/* 商品リスト */
+.item-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* 商品カード */
+.item-card {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.item-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.item-card p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}

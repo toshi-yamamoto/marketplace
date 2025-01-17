@@ -1,0 +1,67 @@
+/* ログインページのコンテナ */
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* 見出し */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* ラベル */
+label {
+    font-weight: bold;
+    display: block;
+    text-align: left;
+    margin: 10px 0 5px;
+}
+
+/* 入力フィールド */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* ボタン */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #d67c6f;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #b56554;
+}
+
+/* リンク */
+a {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: blue;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* エラーメッセージ */
+.error {
+    color: red;
+    font-size: 14px;
+    text-align: left;
+    margin-bottom: 10px;
+}

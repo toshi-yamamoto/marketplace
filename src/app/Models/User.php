@@ -18,9 +18,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name',            // ユーザー名
+        'email',           // メールアドレス
+        'password',        // パスワード
+        'profile_image',   // プロフィール画像
+        'postal_code',     // 郵便番号
+        'address',         // 住所
+        'building_name',   // 建物名
     ];
 
     /**
