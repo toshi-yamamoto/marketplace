@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,11 @@ use Illuminate\Support\Facades\Auth;
 
 // 商品一覧ページ
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
+
+// 商品詳細ページ
+Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('items.show');
+
+Route::get('/search', [ItemController::class, 'search'])->name('items.search');
 
 // ログイン
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -51,3 +57,6 @@ Route::put('/profile', [UserController::class, 'update'])->middleware('auth')->n
 
 // 商品作成画面
 Route::get('/items/create', [ItemController::class, 'create'])->middleware('auth')->name('items.create');
+
+
+Route::post('/item/{item_id}/comments', [CommentController::class, 'store'])->name('comments.store');

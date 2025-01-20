@@ -66,3 +66,69 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* メディアクエリ: タブレット (768px - 850px) */
+@media (max-width: 850px) {
+    .container {
+        max-width: 400px;
+        /* コンテナの幅を狭く */
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 20px;
+        /* 見出しを少し小さく */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        font-size: 14px;
+        /* 入力フィールドのフォントを調整 */
+        padding: 8px;
+    }
+
+    button {
+        font-size: 14px;
+        /* ボタンのフォントサイズを小さく */
+        padding: 8px;
+    }
+
+    a {
+        font-size: 12px;
+        /* リンクのフォントサイズを小さく */
+    }
+}
+
+/* メディアクエリ: PC (1400px - 1540px) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 600px;
+        /* コンテナの幅を広く */
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 28px;
+        /* 見出しを大きく */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        font-size: 18px;
+        /* 入力フィールドのフォントを大きく */
+        padding: 12px;
+    }
+
+    button {
+        font-size: 18px;
+        /* ボタンのフォントサイズを大きく */
+        padding: 12px;
+    }
+
+    a {
+        font-size: 16px;
+        /* リンクのフォントサイズを大きく */
+    }
+}

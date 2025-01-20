@@ -2,9 +2,9 @@
 
 @section('title', '会員登録')
 
-@push('css')
+@section('styles')
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
-@endpush
+@endsection
 
 @section('content')
 <div class="container">

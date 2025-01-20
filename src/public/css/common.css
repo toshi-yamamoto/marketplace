@@ -12,12 +12,24 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #000;
+    background-color: #000 !important;
     padding: 10px 20px;
+    height: 60px;
+}
+
+.header .logo {
+    display: flex;
+    align-items: center;
+    /* 縦方向の中央揃え */
+    justify-content: center;
+    /* 横方向の中央揃え */
 }
 
 .header .logo img {
-    height: 40px;
+    height: 30px;
+    width: auto;
+    display: block;
+    margin: 0;
 }
 
 .header .nav a,
@@ -38,10 +50,60 @@ body {
     text-decoration: underline;
 }
 
+.header .search-bar {
+    flex: 1;
+    text-align: center;
+}
+
+.header .search-bar form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header .search-bar input[type="text"] {
+    width: 300px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.header .search-bar button {
+    padding: 5px 10px;
+    margin-left: 5px;
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.header .search-bar button:hover {
+    background-color: #e03a3a;
+}
+
 /* フッター */
 footer {
     text-align: center;
     padding: 10px 0;
     font-size: 14px;
     color: #777;
+}
+
+/* メディアクエリ: タブレット (768px - 850px) */
+@media (max-width: 850px) {
+    .logo img {
+        height: 20px;
+        /* タブレット用にさらに小さく調整 */
+    }
+}
+
+/* メディアクエリ: PC (1400px以上) */
+@media (min-width: 1400px) {
+    .logo img {
+        height: 40px;
+        /* PC用に少し大きめに調整 */
+    }
 }

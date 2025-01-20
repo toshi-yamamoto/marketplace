@@ -10,14 +10,24 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',        // 商品名
-        'image_url',   // 画像パス
-        'user_id',     // 出品者ID
+        'name',
+        'description',
+        'brand_name',
+        'price',
+        'condition',
+        'category',
+        'item_image',
+        'user_id',
     ];
 
     // 出品者（ユーザー）とのリレーション
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }
