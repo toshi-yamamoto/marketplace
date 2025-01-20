@@ -20,14 +20,27 @@ class Item extends Model
         'user_id',
     ];
 
-    // 出品者（ユーザー）とのリレーション
+    /**
+     * 商品を出品したユーザー
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * 商品へのコメント
+     */
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * 商品へのいいね
+     */
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
     }
 }

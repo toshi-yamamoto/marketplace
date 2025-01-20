@@ -26,10 +26,18 @@ class ItemController extends Controller
         return view('items.index', compact('items'));
     }
 
+    // public function show($item_id)
+    // {
+    //     // 商品情報を取得
+    //     $item = Item::with('user', 'comments.user')->findOrFail($item_id);
+
+    //     return view('items.show', compact('item'));
+    // }
+
     public function show($item_id)
     {
-        // 商品情報を取得
-        $item = Item::with('user', 'comments.user')->findOrFail($item_id);
+        // 商品情報を取得し、likes_count と comments_count を取得
+        $item = Item::withCount(['likes', 'comments'])->findOrFail($item_id);
 
         return view('items.show', compact('item'));
     }

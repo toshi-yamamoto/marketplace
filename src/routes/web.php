@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,5 +59,7 @@ Route::put('/profile', [UserController::class, 'update'])->middleware('auth')->n
 // 商品作成画面
 Route::get('/items/create', [ItemController::class, 'create'])->middleware('auth')->name('items.create');
 
-
 Route::post('/item/{item_id}/comments', [CommentController::class, 'store'])->name('comments.store');
+
+Route::post('/items/{itemId}/like', [LikeController::class, 'toggleLike'])->middleware('auth')->name('items.like');
+

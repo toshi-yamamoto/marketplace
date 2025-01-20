@@ -24,8 +24,10 @@
 
             <div class="actions">
                 <div class="likes">
-                    <button class="like-button"><i class="fas fa-star"></i></button>
-                    <span>{{ $item->likes_count ?? 0 }}</span>
+                    <button class="like-button" id="like-button" data-item-id="{{ $item->id }}">
+                        <i class="fas fa-star"></i>
+                    </button>
+        <span id="like-count">{{ $item->likes_count ?? 0 }}</span>
                 </div>
                 <div class="comments">
                     <i class="fas fa-comment"></i>
@@ -60,4 +62,48 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const likeButton = document.getElementById('like-button');
+        if (likeButton) {
+            likeButton.addEventListener('click', function () {
+                const itemId = likeButton.dataset.itemId;
+
+                fetch(`/items/${itemId}/like`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Content-Type': 'application/json',
+                    },
+                })
+                    .then(response => {
+                        if (response.status === 401) {
+                            // 未認証の場合、ログインページにリダイレクト
+                            return response.json().then(data => {
+                                window.location.href = data.redirect;
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.status === 'added') {
+                            const likeCount = document.getElementById('like-count');
+                            likeCount.textContent = parseInt(likeCount.textContent) + 1;
+                            likeButton.classList.add('liked');
+                        } else if (data.status === 'removed') {
+                            const likeCount = document.getElementById('like-count');
+                            likeCount.textContent = parseInt(likeCount.textContent) - 1;
+                            likeButton.classList.remove('liked');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('エラー:', error);
+                    });
+            });
+        }
+    });
+</script>
 @endsection
