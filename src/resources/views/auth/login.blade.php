@@ -13,7 +13,7 @@
         @csrf
 
         <!-- メールアドレス / ユーザー名 -->
-        <label for="email">ユーザー名 / メールアドレス</label>
+        <label for="email">メールアドレス</label>
         <input type="text" id="email" name="email" value="{{ old('email') }}" required>
         @error('email') <p class="error">{{ $message }}</p> @enderror
 

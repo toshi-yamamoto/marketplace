@@ -3,7 +3,7 @@
 @section('title', '商品一覧')
 
 @push('css')
-<link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 @endpush
 
 @section('content')
@@ -19,7 +19,8 @@
     <div class="item-list">
         @forelse($items as $item)
             <div class="item-card">
-                <img src="{{ $item->image_url ? asset('storage/' . $item->image_url) : asset('images/default-item.png') }}" alt="商品画像">
+                <img src="{{ $item->image_url ? asset('storage/' . $item->image_url) : asset('images/default-item.png') }}"
+                    alt="商品画像">
                 <p>{{ $item->name }}</p>
             </div>
         @empty

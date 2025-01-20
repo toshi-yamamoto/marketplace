@@ -24,24 +24,21 @@ class AuthController extends Controller
     /**
      * ログイン処理
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        // バリデーション
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        // バリデーション済みデータを取得
+        $credentials = $request->validated();
 
         // 認証試行
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('/')->with('success', 'ログインしました！');
+            return redirect()->intended('/')->with('success', 'ログインしました！');
         }
 
         // 認証失敗
         return back()->withErrors([
-            'email' => 'メールアドレスまたはパスワードが正しくありません。',
-        ])->onlyInput('email');
+            'email' => 'ログイン情報が登録されていません。',
+        ])->onlyInput('email'); // 入力済みのメールアドレスを保持
     }
 
     /**
