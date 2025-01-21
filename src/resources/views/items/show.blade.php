@@ -24,8 +24,7 @@
 
             <div class="actions">
                 <div class="likes">
-                    <button class="like-button {{ $item->is_liked_by_auth_user ? 'liked' : '' }}" id="like-button"
-                        data-item-id="{{ $item->id }}">
+                    <button class="like-button {{ $item->likes->contains('user_id', auth()->id()) ? 'liked' : '' }}" id="like-button" data-item-id="{{ $item->id }}">
                         <i class="fas fa-star"></i>
                     </button>
                     <span id="like-count">{{ $item->likes_count ?? 0 }}</span>

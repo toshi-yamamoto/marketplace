@@ -18,21 +18,21 @@ class ItemController extends Controller
 
         // タブによるフィルタリング（例: "おすすめ" や "マイリスト"）
         if ($request->tab === 'mylist') {
-            $query->where('user_id', auth()->id()); // ユーザーが追加した商品
+            if (auth()->check()) {
+                // 認証ユーザーの場合、いいねした商品のみ表示
+                $query->whereHas('likes', function ($query) {
+                    $query->where('user_id', auth()->id());
+                });
+            } else {
+                // 未認証ユーザーの場合は空を返す
+                $query->whereNull('id');
+            }
         }
 
         $items = $query->get();
 
         return view('items.index', compact('items'));
     }
-
-    // public function show($item_id)
-    // {
-    //     // 商品情報を取得
-    //     $item = Item::with('user', 'comments.user')->findOrFail($item_id);
-
-    //     return view('items.show', compact('item'));
-    // }
 
     public function show($item_id)
     {
