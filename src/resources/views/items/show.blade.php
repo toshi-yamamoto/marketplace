@@ -24,10 +24,11 @@
 
             <div class="actions">
                 <div class="likes">
-                    <button class="like-button" id="like-button" data-item-id="{{ $item->id }}">
+                    <button class="like-button {{ $item->is_liked_by_auth_user ? 'liked' : '' }}" id="like-button"
+                        data-item-id="{{ $item->id }}">
                         <i class="fas fa-star"></i>
                     </button>
-        <span id="like-count">{{ $item->likes_count ?? 0 }}</span>
+                    <span id="like-count">{{ $item->likes_count ?? 0 }}</span>
                 </div>
                 <div class="comments">
                     <i class="fas fa-comment"></i>
@@ -89,12 +90,11 @@
                         return response.json();
                     })
                     .then(data => {
+                        const likeCount = document.getElementById('like-count');
                         if (data.status === 'added') {
-                            const likeCount = document.getElementById('like-count');
                             likeCount.textContent = parseInt(likeCount.textContent) + 1;
                             likeButton.classList.add('liked');
                         } else if (data.status === 'removed') {
-                            const likeCount = document.getElementById('like-count');
                             likeCount.textContent = parseInt(likeCount.textContent) - 1;
                             likeButton.classList.remove('liked');
                         }

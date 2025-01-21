@@ -74,18 +74,11 @@
     cursor: pointer;
     font-size: 20px;
     color: gray;
+    transition: color 0.2s;
 }
 
-.like-button:hover {
+.like-button.liked i {
     color: red;
-}
-
-.comments i {
-    color: gray;
-}
-
-.comments i:hover {
-    color: blue;
 }
 
 /* 購入ボタン */

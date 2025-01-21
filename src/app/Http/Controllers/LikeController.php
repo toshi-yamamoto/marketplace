@@ -11,31 +11,25 @@ class LikeController extends Controller
     public function toggleLike(Request $request, $itemId)
     {
         if (!Auth::check()) {
-            // 未認証ユーザーへのレスポンス
+            // 未認証ユーザーへのレスポンスをJSONで返す
             return response()->json([
                 'message' => 'ログインが必要です。',
                 'redirect' => route('login'),
-            ], 401); // HTTP 401 Unauthorized
+            ], 401);
         }
 
-        $userId = auth()->id(); // 現在ログインしているユーザーID
+        $userId = auth()->id();
 
-        // すでに「いいね」が存在しているか確認
         $like = Like::where('user_id', $userId)->where('item_id', $itemId)->first();
 
         if ($like) {
-            // 「いいね」が存在する場合は削除（解除）
             $like->delete();
             return response()->json([
                 'message' => 'いいねを解除しました。',
                 'status' => 'removed',
             ]);
         } else {
-            // 存在しない場合は新しく作成（いいねを保存）
-            Like::create([
-                'user_id' => $userId,
-                'item_id' => $itemId,
-            ]);
+            Like::create(['user_id' => $userId, 'item_id' => $itemId]);
             return response()->json([
                 'message' => 'いいねをしました！',
                 'status' => 'added',

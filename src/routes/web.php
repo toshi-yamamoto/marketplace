@@ -61,5 +61,4 @@ Route::get('/items/create', [ItemController::class, 'create'])->middleware('auth
 
 Route::post('/item/{item_id}/comments', [CommentController::class, 'store'])->name('comments.store');
 
-Route::post('/items/{itemId}/like', [LikeController::class, 'toggleLike'])->middleware('auth')->name('items.like');
-
+Route::post('/items/{itemId}/like', [LikeController::class, 'toggleLike'])->name('items.like');
