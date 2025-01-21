@@ -7,6 +7,7 @@ use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
+use Illuminate\Support\Facades\Mail; // mailhog test
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,23 @@ Route::put('/profile', [UserController::class, 'update'])->middleware('auth')->n
 // 商品作成画面
 Route::get('/items/create', [ItemController::class, 'create'])->middleware('auth')->name('items.create');
 
+// コメント登録処理
 Route::post('/item/{item_id}/comments', [CommentController::class, 'store'])->name('comments.store');
 
+// いいね登録処理
 Route::post('/items/{itemId}/like', [LikeController::class, 'toggleLike'])->name('items.like');
+
+// mailhogテストメール用
+Route::get('/test-mail', function () {
+    $details = [
+        'subject' => 'テストメール',
+        'body' => 'これはテストメールです。MailHogを使用してメール送信をテストしています。',
+    ];
+
+    Mail::raw($details['body'], function ($message) use ($details) {
+        $message->to('test@example.com') // 受信者のメールアドレス（MailHogでキャプチャされます）
+            ->subject($details['subject']); // 件名
+    });
+
+    return 'メール送信テスト完了！';
+});
