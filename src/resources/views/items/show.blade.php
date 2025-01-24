@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            <a href="#" class="purchase-btn">購入手続きへ</a>
+            <a href="{{ route('purchases.create', ['item_id' => $item->id]) }}" class="purchase-btn">購入手続きへ</a>
 
             <!-- 商品説明 -->
             <div class="description">
@@ -53,11 +53,32 @@
             <!-- コメント -->
             <div class="comments-section">
                 <h2>コメント ({{ $item->comments->count() }})</h2>
-                <form action="#" method="POST">
+
+                    <!-- コメント一覧 -->
+                    <div class="comment-list">
+                        @forelse ($item->comments as $comment)
+                            <div class="comment-item">
+                                <div class="comment-header">
+                                    <span class="comment-author">{{ $comment->user->name }}</span>
+                                </div>
+                                <div class="comment-content">
+                                    <p>{{ $comment->content }}</p>
+                                </div>
+                            </div>
+                        @empty
+                            <p>コメントはまだありません。</p>
+                        @endforelse
+                    </div>
+
+                <form action="{{ route('comments.store', $item->id) }}" method="POST">
                     @csrf
-                    <textarea name="content"></textarea>
+                    <textarea name="content" placeholder="コメントを入力してください"></textarea>
+                    @error('content')
+                        <div class="error" style="color: red;">{{ $message }}</div>
+                    @enderror
                     <button type="submit">コメントを送信する</button>
                 </form>
+                
             </div>
         </div>
     </div>

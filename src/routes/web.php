@@ -7,7 +7,7 @@ use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
-use Illuminate\Support\Facades\Mail; // mailhog test
+use App\Http\Controllers\PurchaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +26,7 @@ Route::get('/', [ItemController::class, 'index'])->name('items.index');
 // 商品詳細ページ
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('items.show');
 
+// 商品検索
 Route::get('/search', [ItemController::class, 'search'])->name('items.search');
 
 // ログイン
@@ -38,45 +39,37 @@ Route::post('/logout', function () {
     return redirect('/')->with('success', 'ログアウトしました！');
 })->name('logout');
 
+// 会員登録
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->middleware('guest')->name('register');
+Route::post('/register', [AuthController::class, 'register'])->middleware('guest');
+
 // 認証が必要なルート
 Route::middleware('auth')->group(function () {
     // マイページ
     Route::get('/profile', [UserController::class, 'edit'])->name('users.profile');
 
+    // プロフィール更新処理
+    Route::put('/profile', [UserController::class, 'update'])->name('users.profile.update');
+
     // 出品ページ
     Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
+
+    // コメント登録処理
+    Route::post('/item/{item_id}/comments', [CommentController::class, 'store'])
+        ->name('comments.store'); // コメント投稿は認証が必要
+
+    // 商品購入画面
+    Route::get('/purchase/{item_id}', [PurchaseController::class, 'create'])->name('purchases.create');
+
+    // 購入処理
+    Route::post('/purchase', [PurchaseController::class, 'store'])->name('purchases.store');
+
+    // 住所変更画面
+    Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'editAddress'])->name('purchases.editAddress');
+
+    // 住所変更処理
+    Route::put('/purchase/address/{item_id}', [PurchaseController::class, 'updateAddress'])->name('purchases.updateAddress');
 });
 
-// 会員登録
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->middleware('guest')->name('register');
-Route::post('/register', [AuthController::class, 'register'])->middleware('guest');
-
-// プロフィール設定画面
-Route::get('/profile', [UserController::class, 'edit'])->middleware('auth')->name('users.profile');
-
-// プロフィール更新処理
-Route::put('/profile', [UserController::class, 'update'])->middleware('auth')->name('users.profile.update');
-
-// 商品作成画面
-Route::get('/items/create', [ItemController::class, 'create'])->middleware('auth')->name('items.create');
-
-// コメント登録処理
-Route::post('/item/{item_id}/comments', [CommentController::class, 'store'])->name('comments.store');
-
-// いいね登録処理
+// いいね登録処理（未認証でもJSでリダイレクト処理済みの場合）
 Route::post('/items/{itemId}/like', [LikeController::class, 'toggleLike'])->name('items.like');
-
-// mailhogテストメール用
-Route::get('/test-mail', function () {
-    $details = [
-        'subject' => 'テストメール',
-        'body' => 'これはテストメールです。MailHogを使用してメール送信をテストしています。',
-    ];
-
-    Mail::raw($details['body'], function ($message) use ($details) {
-        $message->to('test@example.com') // 受信者のメールアドレス（MailHogでキャプチャされます）
-            ->subject($details['subject']); // 件名
-    });
-
-    return 'メール送信テスト完了！';
-});

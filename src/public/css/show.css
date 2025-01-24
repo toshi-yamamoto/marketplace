@@ -145,3 +145,59 @@
 .comments-section button:hover {
     background-color: #e03a3a;
 }
+
+/* コメントセクション */
+.comments-section {
+    margin-top: 20px;
+}
+
+.comment-list {
+    margin-bottom: 20px;
+}
+
+.comment-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+.comment-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.comment-author {
+    color: #333;
+}
+
+.comment-content {
+    font-size: 14px;
+    color: #555;
+}
+
+/* コメント投稿フォーム */
+.comments-section form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: vertical;
+    margin-bottom: 10px;
+}
+
+.comments-section form button {
+    padding: 10px 20px;
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.comments-section form button:hover {
+    background-color: #e03a3a;
+}

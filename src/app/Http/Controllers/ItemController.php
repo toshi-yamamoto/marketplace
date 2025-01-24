@@ -36,8 +36,13 @@ class ItemController extends Controller
 
     public function show($item_id)
     {
+        // // 商品情報を取得し、likes_count と comments_count を取得
+        // $item = Item::withCount(['likes', 'comments'])->findOrFail($item_id);
+
         // 商品情報を取得し、likes_count と comments_count を取得
-        $item = Item::withCount(['likes', 'comments'])->findOrFail($item_id);
+        $item = Item::with(['comments.user']) // コメントとその投稿者を取得
+            ->withCount(['likes', 'comments']) // いいねとコメント数をカウント
+            ->findOrFail($item_id);
 
         return view('items.show', compact('item'));
     }
