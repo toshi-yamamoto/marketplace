@@ -1,63 +1,100 @@
+/* 全体のコンテナ */
 .container {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 1200px;
+    margin: 50px auto;
     padding: 20px;
-    font-family: Arial, sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
+/* 商品購入詳細 */
+.purchase-detail {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
 }
 
-.item-detail {
-    margin-bottom: 20px;
+/* 左側エリア */
+.left {
+    flex: 1;
 }
 
-.item-detail img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-form label {
-    display: block;
-    margin: 10px 0 5px;
+.left h2 {
+    margin-top: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 
-form input,
-form select {
+.left p {
+    margin: 5px 0;
+}
+
+.left select {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-top: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
 
-form button {
+/* 商品情報: 商品画像と商品名 */
+.product-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.product-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.product-name h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.product-name p {
+    font-size: 16px;
+    color: gray;
+    margin: 5px 0 0;
+}
+
+/* 右側エリア */
+.right {
+    flex-basis: 300px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.summary {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.purchase-btn {
     display: block;
     width: 100%;
     padding: 10px;
     background-color: #ff4d4d;
-    color: white;
-    font-size: 16px;
+    color: #fff;
+    text-align: center;
     border: none;
     border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
+    margin-top: 20px;
 }
 
-form button:hover {
+.purchase-btn:hover {
     background-color: #e03a3a;
-}
-
-a {
-    display: inline-block;
-    margin-top: 10px;
-    color: blue;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
 }
