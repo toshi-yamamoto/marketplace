@@ -3,7 +3,7 @@
 @section('title', '配送先住所の変更')
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/purchase.css') }}">
+<link rel="stylesheet" href="{{ asset('css/edit-address.css') }}">
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@
 
         <!-- 郵便番号 -->
         <label for="zip">郵便番号</label>
-        <input type="text" id="zip" name="zip" value="{{ old('zip', $user->zip) }}" required>
+        <input type="text" id="postal_code" name="postal_code" value="{{ old('postal_code', $user->postal_code) }}" required>
 
         <!-- 住所 -->
         <label for="address">住所</label>
@@ -25,7 +25,7 @@
 
         <!-- 建物名 -->
         <label for="building">建物名（任意）</label>
-        <input type="text" id="building" name="building" value="{{ old('building', $user->building) }}">
+        <input type="text" id="building_name" name="building_name" value="{{ old('building_name', $user->building_name) }}">
 
         <!-- 更新ボタン -->
         <button type="submit" class="btn btn-primary">住所を更新する</button>

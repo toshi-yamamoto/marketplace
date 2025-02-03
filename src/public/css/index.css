@@ -108,16 +108,26 @@ h1 {
 
 /* メディアクエリ: スマートフォン (768px以下) */
 @media (max-width: 768px) {
-    .item-list {
-        grid-template-columns: repeat(1, 1fr);
-        /* スマートフォンでは1列 */
+    .item-detail {
+        flex-direction: column;
+        /* 商品画像と商品情報を縦に並べる */
+    }
+
+    .image img {
+        max-width: 100%;
+        /* 画像の幅を100%に */
+    }
+
+    .info {
+        margin-top: 20px;
+        /* 商品情報に上マージンを追加 */
     }
 }
 
 /* メディアクエリ: PC (1400px - 1540px) */
 @media (min-width: 1400px) {
     .container {
-        max-width: 600px;
+        max-width: 1400px;
         padding: 30px;
     }
 
@@ -125,19 +135,23 @@ h1 {
         font-size: 28px;
     }
 
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
+    .info p {
         font-size: 18px;
-        padding: 12px;
     }
 
-    button {
+    .purchase-btn {
         font-size: 18px;
-        padding: 12px;
+        padding: 12px 20px;
     }
 
-    a {
-        font-size: 16px;
+    .description h2,
+    .details h2,
+    .comments-section h2 {
+        font-size: 22px;
+    }
+
+    .description p,
+    .details p {
+        font-size: 18px;
     }
 }

@@ -1,0 +1,51 @@
+/* public/css/edit-address.css */
+
+/* 全体のコンテナ */
+.container {
+    /* 画面中央に配置 */
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+/* タイトル */
+.container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* フォームのラベル */
+label {
+    display: block;
+    /* ブロック要素にして改行 */
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* 入力フィールド */
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* 更新ボタン */
+button.btn.btn-primary {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #D36C5B;
+    /* ボタンの色はお好みで */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* ボタンのホバー */
+button.btn.btn-primary:hover {
+    background-color: #c85d4f;
+}

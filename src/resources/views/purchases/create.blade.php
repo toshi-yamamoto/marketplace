@@ -25,7 +25,7 @@
                 <h2>支払い方法</h2>
                 <form method="POST" action="{{ route('purchases.store', $item->id) }}">
                     @csrf
-                    <select name="payment_method" required>
+                    <select name="payment_method" id="payment-method" required>
                         <option value="">選択してください</option>
                         <option value="クレジットカード">クレジットカード</option>
                         <option value="コンビニ払い">コンビニ払い</option>
@@ -38,7 +38,7 @@
                 <h2>配送先</h2>
                 <p>〒{{ $user->postal_code }}</p>
                 <p>{{ $user->address }}</p>
-                <p>{{ $user->building }}</p>
+                <p>{{ $user->building_name}}</p>
                 <a href="{{ route('purchases.editAddress', $item->id) }}">変更する</a>
             </div>
         </div>
@@ -52,11 +52,25 @@
 
             <div class="summary">
                 <p>支払い方法</p>
-                <p>{{ old('payment_method', '選択してください') }}</p>
+                <p id="selected-payment-method">選択してください</p>
             </div>
 
             <button type="submit" class="purchase-btn">購入する</button>
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const paymentMethodSelect = document.getElementById('payment-method');
+        const selectedPaymentMethod = document.getElementById('selected-payment-method');
+
+        // 支払い方法の選択が変更されたときに右側に反映
+        paymentMethodSelect.addEventListener('change', function () {
+            selectedPaymentMethod.textContent = this.value || '選択してください';
+        });
+    });
+</script>
 @endsection

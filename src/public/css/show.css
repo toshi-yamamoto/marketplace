@@ -201,3 +201,54 @@
 .comments-section form button:hover {
     background-color: #e03a3a;
 }
+
+/* メディアクエリ: タブレット (768px - 850px) */
+@media (max-width: 850px) {
+    .container {
+        max-width: 600px;
+        padding: 15px;
+    }
+
+    .item-detail {
+        flex-direction: column;
+    }
+
+    .image {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .info h1 {
+        font-size: 20px;
+    }
+
+    .info p {
+        font-size: 14px;
+    }
+
+    .purchase-btn {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+/* メディアクエリ: PC (1400px - 1540px) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1400px;
+        padding: 30px;
+    }
+
+    .info h1 {
+        font-size: 28px;
+    }
+
+    .info p {
+        font-size: 18px;
+    }
+
+    .purchase-btn {
+        font-size: 18px;
+        padding: 12px;
+    }
+}
