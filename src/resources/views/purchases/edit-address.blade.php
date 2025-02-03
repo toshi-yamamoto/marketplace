@@ -24,8 +24,8 @@
         <input type="text" id="address" name="address" value="{{ old('address', $user->address) }}" required>
 
         <!-- 建物名 -->
-        <label for="building">建物名（任意）</label>
-        <input type="text" id="building_name" name="building_name" value="{{ old('building_name', $user->building_name) }}">
+        <label for="building">建物名</label>
+        <input type="text" id="building_name" name="building_name" value="{{ old('building_name', $user->building_name) }}" required>
 
         <!-- 更新ボタン -->
         <button type="submit" class="btn btn-primary">住所を更新する</button>

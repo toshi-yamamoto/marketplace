@@ -52,6 +52,6 @@ class UserController extends Controller
         ]);
 
         // リダイレクト
-        return redirect()->route('items.index')->with('success', 'プロフィールを更新しました！');
+        return redirect()->route('users.profile')->with('success', 'プロフィールを更新しました！');
     }
 }

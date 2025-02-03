@@ -47,13 +47,13 @@ class PurchaseController extends Controller
     public function updateAddress(Request $request, $item_id)
     {
         $request->validate([
-            'zip' => 'required|string|max:10',
+            'postal_code' => 'required|string|max:10',
             'address' => 'required|string|max:255',
-            'building' => 'nullable|string|max:255',
+            'building_name' => 'nullable|string|max:255',
         ]);
 
         $user = auth()->user();
-        $user->update($request->only('zip', 'address', 'building'));
+        $user->update($request->only('postal_code', 'address', 'building_name'));
 
         return redirect()->route('purchases.create', ['item_id' => $item_id])->with('success', '住所を更新しました！');
     }
