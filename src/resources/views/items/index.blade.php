@@ -20,11 +20,16 @@
     <div class="item-list">
         @forelse ($items as $item)
             <div class="item-card">
-                <!-- 商品画像にリンクを追加 -->
-                <a href="{{ route('items.show', $item->id) }}">
-                    <img src="{{ asset('storage/' . $item->item_image) }}" alt="{{ $item->name }}">
+                <!-- 商品画像部分 -->
+                <a href="{{ route('items.show', $item->id) }}" class="image-link">
+                    <div class="image-container">
+                        <img src="{{ asset('storage/' . $item->item_image) }}" alt="{{ $item->name }}">
+                        @if($item->purchase)
+                            <div class="sold-overlay">SOLD</div>
+                        @endif
+                    </div>
                 </a>
-                <!-- 商品名にリンクを追加 -->
+                <!-- 商品名 -->
                 <a href="{{ route('items.show', $item->id) }}">
                     <p>{{ $item->name }}</p>
                 </a>

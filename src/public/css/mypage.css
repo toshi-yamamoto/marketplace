@@ -1,0 +1,200 @@
+/* resources/css/mypage.css */
+
+/* コンテナ */
+.container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+/* プロフィールヘッダー */
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+/* プロフィール画像 */
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+/* ダミーの丸い枠 */
+.profile-dummy {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-right: 20px;
+}
+
+.profile-info h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.edit-profile-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: #d67c6f;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.edit-profile-btn:hover {
+    background-color: #b56554;
+}
+
+/* 見出し */
+h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* 商品リスト */
+.item-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* 商品カード */
+.item-card {
+    width: 200px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    padding: 10px;
+}
+
+.item-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.no-image {
+    width: 100%;
+    height: 150px;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* resources/css/mypage.css */
+
+/* タブ */
+.tabs {
+    margin-bottom: 20px;
+}
+
+.tabs a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.tabs a.active {
+    color: red;
+    border-bottom: 2px solid red;
+}
+
+/* 商品リスト */
+.item-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.item-card {
+    width: 200px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    padding: 10px;
+}
+
+.item-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.no-image {
+    width: 100%;
+    height: 150px;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+/* レスポンシブ対応: タブレット */
+@media (max-width: 850px) {
+    .container {
+        max-width: 400px;
+        padding: 15px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+    }
+
+    .profile-image,
+    .profile-dummy {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .profile-info h1 {
+        font-size: 20px;
+    }
+
+    .item-list {
+        justify-content: center;
+    }
+}
+
+/* レスポンシブ対応: PC (1400px以上) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1400px;
+        padding: 30px;
+    }
+
+    .profile-info h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .item-card {
+        width: 250px;
+    }
+
+    .item-card img,
+    .no-image {
+        height: 200px;
+    }
+}

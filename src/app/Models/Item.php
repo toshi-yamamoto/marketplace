@@ -48,4 +48,9 @@ class Item extends Model
     {
         return $this->likes()->where('user_id', auth()->id())->exists();
     }
+
+    public function purchase()
+    {
+        return $this->hasOne(Purchase::class);
+    }
 }

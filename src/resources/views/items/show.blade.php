@@ -13,7 +13,12 @@
     <div class="item-detail">
         <!-- 左側: 商品画像 -->
         <div class="image">
-            <img src="{{ asset('storage/' . $item->item_image) }}" alt="{{ $item->name }}">
+            <div class="image-container"> <!-- *** 修正箇所：画像を囲むコンテナを追加 *** -->
+                <img src="{{ asset('storage/' . $item->item_image) }}" alt="{{ $item->name }}">
+                @if($item->purchase) <!-- *** 修正箇所：購入済みの場合、SOLDオーバーレイを表示 *** -->
+                    <div class="sold-overlay">SOLD</div>
+                @endif
+            </div>
         </div>
 
         <!-- 右側: 商品情報 -->
@@ -24,7 +29,8 @@
 
             <div class="actions">
                 <div class="likes">
-                    <button class="like-button {{ $item->likes->contains('user_id', auth()->id()) ? 'liked' : '' }}" id="like-button" data-item-id="{{ $item->id }}">
+                    <button class="like-button {{ $item->likes->contains('user_id', auth()->id()) ? 'liked' : '' }}"
+                        id="like-button" data-item-id="{{ $item->id }}">
                         <i class="fas fa-star"></i>
                     </button>
                     <span id="like-count">{{ $item->likes_count ?? 0 }}</span>
@@ -35,7 +41,12 @@
                 </div>
             </div>
 
-            <a href="{{ route('purchases.create', ['item_id' => $item->id]) }}" class="purchase-btn">購入手続きへ</a>
+            {{-- *** 修正箇所：購入済みなら購入手続きリンクを表示しない *** --}}
+            @if(!$item->purchase)
+                <a href="{{ route('purchases.create', ['item_id' => $item->id]) }}" class="purchase-btn">購入手続きへ</a>
+            @else
+                <p class="sold-text">この商品は既に購入されています。</p>
+            @endif
 
             <!-- 商品説明 -->
             <div class="description">
@@ -54,21 +65,21 @@
             <div class="comments-section">
                 <h2>コメント ({{ $item->comments->count() }})</h2>
 
-                    <!-- コメント一覧 -->
-                    <div class="comment-list">
-                        @forelse ($item->comments as $comment)
-                            <div class="comment-item">
-                                <div class="comment-header">
-                                    <span class="comment-author">{{ $comment->user->name }}</span>
-                                </div>
-                                <div class="comment-content">
-                                    <p>{{ $comment->content }}</p>
-                                </div>
+                <!-- コメント一覧 -->
+                <div class="comment-list">
+                    @forelse ($item->comments as $comment)
+                        <div class="comment-item">
+                            <div class="comment-header">
+                                <span class="comment-author">{{ $comment->user->name }}</span>
                             </div>
-                        @empty
-                            <p>コメントはまだありません。</p>
-                        @endforelse
-                    </div>
+                            <div class="comment-content">
+                                <p>{{ $comment->content }}</p>
+                            </div>
+                        </div>
+                    @empty
+                        <p>コメントはまだありません。</p>
+                    @endforelse
+                </div>
 
                 <form action="{{ route('comments.store', $item->id) }}" method="POST">
                     @csrf
@@ -78,7 +89,7 @@
                     @enderror
                     <button type="submit">コメントを送信する</button>
                 </form>
-                
+
             </div>
         </div>
     </div>
@@ -102,7 +113,6 @@
                 })
                     .then(response => {
                         if (response.status === 401) {
-                            // 未認証の場合、ログインページにリダイレクト
                             return response.json().then(data => {
                                 window.location.href = data.redirect;
                             });

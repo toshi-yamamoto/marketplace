@@ -45,11 +45,14 @@ Route::post('/register', [AuthController::class, 'register'])->middleware('guest
 
 // 認証が必要なルート
 Route::middleware('auth')->group(function () {
-    // マイページ
+    // プロフィール登録
     Route::get('/profile', [UserController::class, 'edit'])->name('users.profile');
 
     // プロフィール更新処理
     Route::put('/profile', [UserController::class, 'update'])->name('users.profile.update');
+
+    // マイページ
+    Route::get('/mypage', [UserController::class, 'mypage'])->name('users.mypage');
 
     // 出品ページ
     Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');

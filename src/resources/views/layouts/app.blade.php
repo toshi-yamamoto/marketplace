@@ -41,7 +41,7 @@
                         <button type="submit"
                             style="background: none; border: none; color: #fff; cursor: pointer; text-decoration: underline;">ログアウト</button>
                     </form>
-                    <a href="{{ route('users.profile') }}">マイページ</a>
+                    <a href="{{ route('users.mypage') }}">マイページ</a>
                     <a href="{{ route('items.create') }}">出品</a>
                 @else
                     <!-- 未認証ユーザー用 -->

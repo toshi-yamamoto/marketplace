@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Item;
+use App\Models\Purchase;
 
 class UserController extends Controller
 {
@@ -53,5 +55,27 @@ class UserController extends Controller
 
         // リダイレクト
         return redirect()->route('users.profile')->with('success', 'プロフィールを更新しました！');
+    }
+
+    public function mypage()
+    {
+        $user = Auth::user();
+
+        // 出品した商品
+        // $postedItems = Item::where('user_id', $user->id)->get();
+        $postedItems = $user->items;
+
+        // 購入した商品
+        // purchasesテーブルから item_id を取得 → Itemを紐付け
+        $purchasedItems = Purchase::where('user_id', $user->id)
+            ->with('item')
+            ->get()
+            ->map(function ($purchase) {
+                return $purchase->item;
+            })
+            ->unique('id')
+            ->values();
+
+        return view('users.mypage', compact('user', 'postedItems', 'purchasedItems'));
     }
 }

@@ -8,54 +8,66 @@
 
 @section('content')
 <div class="container">
+    <!-- 左右2カラムで商品情報と購入フォームを配置 -->
     <div class="purchase-detail">
-        <!-- 左側: 商品情報 -->
+        <!-- 左カラム -->
         <div class="left">
-            <!-- 商品画像と商品名 -->
+            <h1>商品購入</h1>
+
+            <!-- 商品情報 -->
             <div class="product-info">
-                <img src="{{ asset('storage/' . $item->item_image) }}" alt="{{ $item->name }}" class="product-image">
+                @if($item->item_image)
+                    <img src="{{ asset('storage/' . $item->item_image) }}" alt="{{ $item->name }}" class="product-image">
+                @else
+                    <!-- 画像がない場合の簡易表示 -->
+                    <div class="product-image">No Image</div>
+                @endif
+
                 <div class="product-name">
                     <h1>{{ $item->name }}</h1>
                     <p>¥{{ number_format($item->price) }}</p>
                 </div>
             </div>
 
-            <!-- 支払い方法 -->
-            <div class="payment-method">
-                <h2>支払い方法</h2>
-                <form method="POST" action="{{ route('purchases.store', $item->id) }}">
-                    @csrf
-                    <select name="payment_method" id="payment-method" required>
-                        <option value="">選択してください</option>
-                        <option value="クレジットカード">クレジットカード</option>
-                        <option value="コンビニ払い">コンビニ払い</option>
-                    </select>
-                </form>
-            </div>
+            <h2>支払い方法</h2>
+            <!-- 購入フォーム -->
+            <form action="{{ route('purchases.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="item_id" value="{{ $item->id }}">
 
-            <!-- 配送先 -->
-            <div class="shipping-address">
-                <h2>配送先</h2>
-                <p>〒{{ $user->postal_code }}</p>
+                <select name="payment_method" id="payment_method" required>
+                    <option value="">選択してください</option>
+                    <option value="コンビニ払い">コンビニ払い</option>
+                    <option value="クレジットカード">クレジットカード</option>
+                </select>
+
+                <h2>配送先住所</h2>
+                <p>〒{{ $user->zip }}</p>
                 <p>{{ $user->address }}</p>
-                <p>{{ $user->building_name}}</p>
-                <a href="{{ route('purchases.editAddress', $item->id) }}">変更する</a>
-            </div>
+                <p>{{ $user->building }}</p>
+                <a href="{{ route('purchases.editAddress', ['item_id' => $item->id]) }}">配送先を変更する</a>
+
+                <!-- 購入ボタン -->
+                <button type="submit" class="purchase-btn">購入を確定する</button>
+            </form>
         </div>
 
-        <!-- 右側: 料金とボタン -->
+        <!-- 右カラム -->
         <div class="right">
+            <h2>ご注文内容</h2>
             <div class="summary">
-                <p>商品代金</p>
-                <p>¥{{ number_format($item->price) }}</p>
+                <span>商品名</span>
+                <span>{{ $item->name }}</span>
             </div>
-
             <div class="summary">
-                <p>支払い方法</p>
-                <p id="selected-payment-method">選択してください</p>
+                <span>価格</span>
+                <span>¥{{ number_format($item->price) }}</span>
             </div>
-
-            <button type="submit" class="purchase-btn">購入する</button>
+            <div class="summary">
+                <span>支払い方法</span>
+                <!-- リアルタイム反映用にIDを追加 -->
+                <span id="order-payment-method">-</span>
+            </div>
         </div>
     </div>
 </div>
@@ -64,12 +76,13 @@
 @section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const paymentMethodSelect = document.getElementById('payment-method');
-        const selectedPaymentMethod = document.getElementById('selected-payment-method');
+        const paymentSelect = document.getElementById('payment_method');
+        const orderPaymentMethod = document.getElementById('order-payment-method');
 
-        // 支払い方法の選択が変更されたときに右側に反映
-        paymentMethodSelect.addEventListener('change', function () {
-            selectedPaymentMethod.textContent = this.value || '選択してください';
+        // 支払い方法の選択値が変更されたとき
+        paymentSelect.addEventListener('change', function () {
+            // 選択された値を右側に反映
+            orderPaymentMethod.textContent = paymentSelect.value || '-';
         });
     });
 </script>

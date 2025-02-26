@@ -3,15 +3,12 @@
     max-width: 1200px;
     margin: 50px auto;
     padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    /* display:flex は解除し、.purchase-detail でレイアウトを組む */
 }
 
-/* 商品購入詳細 */
+/* 商品購入詳細（左右2カラムレイアウト） */
 .purchase-detail {
     display: flex;
-    justify-content: space-between;
     gap: 20px;
     width: 100%;
 }
@@ -21,14 +18,15 @@
     flex: 1;
 }
 
+.left h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
 .left h2 {
     margin-top: 20px;
     font-size: 18px;
     font-weight: bold;
-}
-
-.left p {
-    margin: 5px 0;
 }
 
 .left select {
@@ -53,6 +51,11 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-right: 20px;
+
+    /* 画像が無い場合の "No Image" 表示用に中央寄せ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .product-name h1 {
@@ -75,12 +78,23 @@
     background-color: #f9f9f9;
 }
 
+.right h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
 .summary {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
 }
 
+.summary span:first-child {
+    font-weight: bold;
+}
+
+/* 購入ボタン */
 .purchase-btn {
     display: block;
     width: 100%;
@@ -97,4 +111,56 @@
 
 .purchase-btn:hover {
     background-color: #e03a3a;
+}
+
+/* メディアクエリ: タブレット (768px - 850px) */
+@media (max-width: 850px) {
+    .container {
+        max-width: 400px;
+        padding: 15px;
+    }
+
+    .purchase-detail {
+        flex-direction: column;
+    }
+
+    .left h1 {
+        font-size: 20px;
+    }
+
+    .left h2 {
+        font-size: 16px;
+    }
+
+    .product-image {
+        width: 120px;
+        height: 120px;
+        margin-right: 10px;
+    }
+
+    .right {
+        flex-basis: auto;
+        margin-top: 20px;
+    }
+}
+
+/* メディアクエリ: PC (1400px以上) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1400px;
+        padding: 30px;
+    }
+
+    .left h1 {
+        font-size: 28px;
+    }
+
+    .product-name h1 {
+        font-size: 28px;
+    }
+
+    .purchase-btn {
+        font-size: 18px;
+        padding: 12px;
+    }
 }

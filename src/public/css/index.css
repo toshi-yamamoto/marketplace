@@ -73,6 +73,26 @@ h1 {
     font-weight: bold;
 }
 
+/* index.css の末尾などに追加 */
+
+/* 画像コンテナを相対位置に */
+.image-container {
+    position: relative;
+}
+
+/* SOLDオーバーレイ */
+.sold-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(255, 0, 0, 0.7);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px 10px;
+    z-index: 9999;
+}
+
 /* メディアクエリ: タブレット (768px - 850px) */
 @media (max-width: 850px) {
     .container {

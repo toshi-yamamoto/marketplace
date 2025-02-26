@@ -202,6 +202,37 @@
     background-color: #e03a3a;
 }
 
+/* 画像コンテナ（オーバーレイ表示用） */
+.image-container {
+    position: relative;
+}
+
+.image-container img {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* SOLDオーバーレイ */
+.sold-overlay {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255, 0, 0, 0.7);
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* 購入済みのメッセージ */
+.sold-text {
+    font-size: 18px;
+    color: red;
+    font-weight: bold;
+}
+
 /* メディアクエリ: タブレット (768px - 850px) */
 @media (max-width: 850px) {
     .container {
