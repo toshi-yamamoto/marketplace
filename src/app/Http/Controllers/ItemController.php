@@ -4,19 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
-    /**
-     * 商品一覧ページを表示
-     */
     public function index(Request $request)
     {
         // デフォルトでは全商品を取得
         $query = Item::query();
 
-        // タブによるフィルタリング（例: "おすすめ" や "マイリスト"）
+        // ログインしている場合、自分が出品した商品は表示しない
+        if (auth()->check()) {
+            $query->where('user_id', '!=', auth()->id());
+        }
+
+        // タブによるフィルタリング
         if ($request->tab === 'mylist') {
             if (auth()->check()) {
                 // 認証ユーザーの場合、いいねした商品のみ表示
@@ -36,10 +39,6 @@ class ItemController extends Controller
 
     public function show($item_id)
     {
-        // // 商品情報を取得し、likes_count と comments_count を取得
-        // $item = Item::withCount(['likes', 'comments'])->findOrFail($item_id);
-
-        // 商品情報を取得し、likes_count と comments_count を取得
         $item = Item::with(['comments.user']) // コメントとその投稿者を取得
             ->withCount(['likes', 'comments']) // いいねとコメント数をカウント
             ->findOrFail($item_id);
@@ -47,50 +46,52 @@ class ItemController extends Controller
         return view('items.show', compact('item'));
     }
 
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'description' => 'nullable|string',
-    //         'price' => 'required|numeric',
-    //         'item_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // バリデーション
-    //     ]);
-
-    //     $itemData = $request->only(['name', 'description', 'price']);
-
-    //     // 画像がアップロードされた場合
-    //     if ($request->hasFile('item_image')) {
-    //         $itemData['item_image'] = $request->file('item_image')->store('item_images', 'public');
-    //     }
-
-    //     $item = Item::create($itemData);
-
-    //     return redirect()->route('items.index')->with('success', '商品を登録しました！');
-    // }
+    public function create()
+    {
+        return view('items.create');
+    }
 
     public function store(Request $request)
     {
+        // 1. バリデーション
         $request->validate([
             'name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'brand_name' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'price' => 'required|numeric',
-            'item_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // バリデーション
+            'condition' => 'required|string|max:255',
+            'item_image' => 'nullable|image|max:2048',
+            'categories' => 'required|array|min:1',   // ここで categories 配列が必須
+            'categories.*' => 'string',
+        ], [
+            'categories.required' => 'カテゴリーは必ず指定してください。'
         ]);
 
-        // リクエストから必要なデータだけ取得
-        $itemData = $request->only(['name', 'description', 'price']);
+        // 2. リクエストから必要なデータを取得
+        $itemData = $request->only([
+            'name',
+            'price',
+            'brand_name',
+            'description',
+            'category',
+            'condition'
+        ]);
 
-        // 現在ログインしているユーザーのIDを追加（これが重要）
-        $itemData['user_id'] = auth()->id();
+        // 3. 現在ログインしているユーザーのIDを追加
+        $itemData['user_id'] = Auth::id();
 
-        // 画像がアップロードされた場合は保存
+        // 複数選択されたカテゴリーを JSON 文字列として保存
+        $itemData['category'] = json_encode($request->input('categories'));
+
+        // 4. 画像がアップロードされた場合は保存
         if ($request->hasFile('item_image')) {
             $itemData['item_image'] = $request->file('item_image')->store('item_images', 'public');
         }
 
-        // 新しい商品をデータベースに登録
+        // 5. 新しい商品をデータベースに登録
         $item = Item::create($itemData);
 
+        // 6. 一覧ページにリダイレクト
         return redirect()->route('items.index')->with('success', '商品を登録しました！');
     }
 

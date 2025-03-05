@@ -86,3 +86,89 @@ button:hover {
     text-align: left;
     margin-bottom: 10px;
 }
+
+/* ---------- メディアクエリ ---------- */
+
+/* タブレット (768px - 850px) */
+@media (max-width: 850px) {
+    .container {
+        max-width: 400px;
+        padding: 15px;
+        margin: 30px auto;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .profile-image img {
+        width: 100px;
+        height: 100px;
+    }
+
+    input[type="text"] {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+/* スマートフォン (768px以下) */
+@media (max-width: 768px) {
+    .container {
+        max-width: 360px;
+        padding: 10px;
+        margin: 20px auto;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    .profile-image img {
+        width: 80px;
+        height: 80px;
+    }
+
+    input[type="text"] {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
+
+/* PC (1400px以上) */
+/* ※ もしPCの上限を1540pxまでに限定したい場合は、@media (min-width: 1400px) and (max-width: 1540px) としてください */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 800px;
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .profile-image img {
+        width: 150px;
+        height: 150px;
+    }
+
+    input[type="text"] {
+        font-size: 18px;
+        padding: 12px;
+    }
+
+    button {
+        font-size: 18px;
+        padding: 12px;
+    }
+}

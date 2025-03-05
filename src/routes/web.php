@@ -57,6 +57,9 @@ Route::middleware('auth')->group(function () {
     // 出品ページ
     Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
 
+    // 商品の保存処理 (POST)
+    Route::post('/items', [ItemController::class, 'store'])->name('items.store');
+
     // コメント登録処理
     Route::post('/item/{item_id}/comments', [CommentController::class, 'store'])
         ->name('comments.store'); // コメント投稿は認証が必要
