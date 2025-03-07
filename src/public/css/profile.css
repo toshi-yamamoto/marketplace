@@ -26,6 +26,19 @@ h1 {
     border: 1px solid #ddd;
 }
 
+.profile-dummy {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #ccc;
+    /* ダミーの背景色 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #666;
+}
+
 .image-button {
     display: inline-block;
     margin-top: 10px;
