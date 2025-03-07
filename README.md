@@ -23,7 +23,7 @@ Coachtech Marketplace は、ユーザーが商品を出品・購入できるマ�
   - PC (1400px以上)、タブレット (768px〜850px)、スマートフォン (768px以下) 向けのデザイン
 
 ## 使用技術
-- **Laravel 10.x** (PHP フレームワーク)
+- **Laravel 8.83.29** (PHP フレームワーク)
 - **PHP 8.1**
 - **MySQL 8.0**
 - **Docker** (Nginx, PHP, MySQL, phpMyAdmin, MailHog)
@@ -181,6 +181,57 @@ Coachtech Marketplace は、ユーザーが商品を出品・購入できるマ�
 ├── docker
 │   └── docker-compose.yml
 └── .env
+
+## ER図
++-----------------+                   +-----------------+
+|     users       |                   |     items       |
++-----------------+                   +-----------------+
+| id (PK)         |                   | id (PK)         |
+| name            |                   | name            |
+| email           |                   | description     |
+| password        |                   | brand_name      |
+| profile_image   |                   | price           |
+| postal_code     |                   | condition       |
+| address         |                   | category (JSON) |
+| building_name   |                   | item_image      |
+| ...             |                   | user_id (FK)    |
+| created_at      |                   | created_at      |
+| updated_at      |                   | updated_at      |
+| ...             |                   | ...             |
++-----------------+                   +-----------------+
+   1 |--------------------∞               |
+     |                                     |
+     |                                     |
+     |              +----------------------+
+     |              |  item belongsTo user
+     |
++-----------------+   hasMany            +-----------------+
+|    comments     | <-------------------> |    likes       |
++-----------------+                      +-----------------+
+| id (PK)         |                      | id (PK)         |
+| content         |                      | user_id (FK)    |
+| user_id (FK)    |                      | item_id (FK)    |
+| item_id (FK)    |                      | created_at      |
+| created_at      |                      | updated_at      |
+| updated_at      |                      +-----------------+
++-----------------+
+  ∞ |    belongsTo user
+    |    belongsTo item
+    |
+    |
++-----------------+
+|   purchases     |
++-----------------+
+| id (PK)         |
+| user_id (FK)    |
+| item_id (FK)    |
+| payment_method  |
+| address         |
+| created_at      |
+| updated_at      |
++-----------------+
+∞ belongsTo user
+1 belongsTo item
 
 ## 開発環境
 	•	Docker により、Nginx、PHP、MySQL、phpMyAdmin、MailHog の各サービスが管理され、簡単に環境構築および運用が可能です。
