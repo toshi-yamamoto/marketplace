@@ -1,4 +1,3 @@
-/* 全体設定 */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -7,7 +6,6 @@ body {
     background-color: #fff;
 }
 
-/* ヘッダー */
 .header {
     display: flex;
     justify-content: space-between;
@@ -20,9 +18,7 @@ body {
 .header .logo {
     display: flex;
     align-items: center;
-    /* 縦方向の中央揃え */
     justify-content: center;
-    /* 横方向の中央揃え */
 }
 
 .header .logo img {
@@ -92,46 +88,33 @@ footer {
     color: #777;
 }
 
-/* ========== ここからメディアクエリ ========== */
-
-/* 850px以下（小画面）のとき */
 @media (max-width: 850px) {
     .header {
-        /* 要素を縦に積む */
         flex-direction: column;
         height: auto;
-        /* 高さ指定は消す */
         align-items: flex-start;
-        /* 左寄せに */
     }
 
-    /* 検索バーを中央寄せにしたまま全幅を使いたい場合 */
     .search-bar {
         width: 100%;
         text-align: left;
-        /* 必要に応じて左寄せ or 中央寄せ */
         margin-top: 10px;
     }
 
     .search-bar form {
         justify-content: flex-start;
-        /* or center */
     }
 
     .search-bar input[type="text"] {
         width: 70%;
-        /* 画面に合わせて動的に変化 */
     }
 
-    /* ナビゲーションをロゴの下や検索バーの下に回したいなら */
     .nav {
         width: 100%;
         margin-top: 10px;
         display: flex;
         justify-content: flex-start;
-        /* リンクを左側に */
         flex-wrap: wrap;
-        /* 折り返せるように */
     }
 
     .nav a,
@@ -140,13 +123,11 @@ footer {
         margin-bottom: 5px;
     }
 
-    /* ロゴをもう少し小さくする例 */
     .logo img {
         height: 20px;
     }
 }
 
-/* PC向け (1400px以上) */
 @media (min-width: 1400px) {
     .logo img {
         height: 40px;

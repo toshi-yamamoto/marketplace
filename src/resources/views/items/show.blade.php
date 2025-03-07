@@ -13,9 +13,9 @@
         <div class="item-detail">
             <!-- 左側: 商品画像 -->
             <div class="image">
-                <div class="image-container"> <!-- *** 修正箇所：画像を囲むコンテナを追加 *** -->
+                <div class="image-container">
                     <img src="{{ asset('storage/' . $item->item_image) }}" alt="{{ $item->name }}">
-                    @if($item->purchase) <!-- *** 修正箇所：購入済みの場合、SOLDオーバーレイを表示 *** -->
+                    @if($item->purchase)
                         <div class="sold-overlay">SOLD</div>
                     @endif
                 </div>
@@ -41,7 +41,6 @@
                     </div>
                 </div>
 
-                {{-- *** 修正箇所：購入済みなら購入手続きリンクを表示しない *** --}}
                 @if(!$item->purchase)
                     <a href="{{ route('purchases.create', ['item_id' => $item->id]) }}" class="purchase-btn">購入手続きへ</a>
                 @else

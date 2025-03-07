@@ -73,8 +73,6 @@ h1 {
     font-weight: bold;
 }
 
-/* index.css の末尾などに追加 */
-
 /* 画像コンテナを相対位置に */
 .image-container {
     position: relative;

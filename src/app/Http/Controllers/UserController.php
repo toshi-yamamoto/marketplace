@@ -62,7 +62,6 @@ class UserController extends Controller
         $user = Auth::user();
 
         // 出品した商品
-        // $postedItems = Item::where('user_id', $user->id)->get();
         $postedItems = $user->items;
 
         // 購入した商品

@@ -1,5 +1,3 @@
-/* resources/css/mypage.css */
-
 /* コンテナ */
 .container {
     max-width: 1000px;
@@ -94,8 +92,6 @@ h2 {
     color: #666;
     margin-bottom: 10px;
 }
-
-/* resources/css/mypage.css */
 
 /* タブ */
 .tabs {
